@@ -1,0 +1,9 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}

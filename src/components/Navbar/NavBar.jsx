@@ -6,10 +6,10 @@ function NavBar() {
     <nav className={styles.navbar}>
       <ul>
         <li>
-          <Link>Login | Student</Link>
+          <Link to="login/student">Login | Student</Link>
         </li>
         <li>
-          <Link>Login | Teacher</Link>
+          <Link to="login/teacher">Login | Teacher</Link>
         </li>
       </ul>
       <img src="logo.png" alt="logo" />

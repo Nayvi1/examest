@@ -5,6 +5,10 @@ function Homepages() {
   return (
     <main className={styles.main}>
       <NavBar />
+      <div className={styles.landing}>
+        <h1>Examest</h1>
+        <p>Make or do tests, as simple as making a wordpress website</p>
+      </div>
     </main>
   );
 }

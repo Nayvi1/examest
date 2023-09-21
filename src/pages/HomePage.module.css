@@ -2,4 +2,26 @@
   max-width: 1440px;
   height: 100vh;
   margin: 0 auto;
+  position: relative;
+}
+
+.landing {
+  max-width: 500px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.landing h1 {
+  font-size: 80px;
+  color: var(--black);
+}
+
+.landing p {
+  color: var(--black);
 }

@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-top: 30px;
 }
 
 .navbar ul {
@@ -17,6 +18,7 @@
 .navbar li:hover:before {
   width: 100%;
 }
+
 .navbar li::before {
   content: "";
   width: 0%;
