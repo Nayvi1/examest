@@ -1,0 +1,30 @@
+ /
+ login/student 
+ login/teacher
+ 
+ student
+ student/:quiz
+ student/result
+
+ teacher
+ teacher/controlQuiz
+ teacher/:quiz/result
+
+ ===============================================
+
+Desktop
+Smallest Text — 12px
+Detail Text — 14px
+Body Text — 16/18px
+Subtitle — 18px
+Title Text — 24/28px
+Main Text — 32/38/42px
+Display Text — 60/72/80px
+
+
+Android
+Smallest Text — 12px
+Paragraph Text — 14px
+Body Text — 16px
+Text Input— 16px
+Title Text — 20/22px
