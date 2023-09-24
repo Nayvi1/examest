@@ -1,13 +1,23 @@
+import { useNavigate } from "react-router-dom";
+import Button from "../../etc/Button";
 import styles from "./TeacherLogin.module.css";
 
 function TeacherLogin() {
+  const navigate = useNavigate();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    navigate("/teacher");
+  }
+
   return (
-    <form className={styles.form}>
-      <label htmlFor="Email">Email</label>
-      <input type="text" name="email" id="email" />
-      <label htmlFor="password">Password</label>
+    <form onSubmit={handleSubmit} className={styles.form}>
+      <label htmlFor="Email">Email:</label>
+      <input autoComplete="off" type="text" name="email" id="email" />
+      <label htmlFor="password">Password:</label>
       <input type="password" id="password" name="password" />
-      <button>Login</button>
+      <Button>Login</Button>
     </form>
   );
 }

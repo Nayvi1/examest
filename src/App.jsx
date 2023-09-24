@@ -13,6 +13,8 @@ function App() {
           <Route path="student" element={<StudentLogin />} />
           <Route path="teacher" element={<TeacherLogin />} />
         </Route>
+        <Route path="student" element={"s"}/>
+        <Route path="teacher" element={"t"}/>
       </Routes>
     </BrowserRouter>
   );
