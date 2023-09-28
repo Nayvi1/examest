@@ -5,22 +5,25 @@ import StudentLogin from "./components/Login/Student/StudentLogin";
 import TeacherLogin from "./components/Login/Teacher/TeacherLogin";
 import Teacher from "./pages/Teacher";
 import CreateQuestion from "./pages/CreateQuestion";
+import QuestionContext from "./context/QuestionContext";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Homepages />} />
-        <Route path="login" element={<Login />}>
-          <Route index element={<Navigate to="/" />} />
-          <Route path="student" element={<StudentLogin />} />
-          <Route path="teacher" element={<TeacherLogin />} />
-        </Route>
-        <Route path="student" element={"s"} />
-        <Route path="teacher" element={<Teacher />} />
-        <Route path="teacher/newQuestion" element={<CreateQuestion />} />
-      </Routes>
-    </BrowserRouter>
+    <QuestionContext>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Homepages />} />
+          <Route path="login" element={<Login />}>
+            <Route index element={<Navigate to="/" />} />
+            <Route path="student" element={<StudentLogin />} />
+            <Route path="teacher" element={<TeacherLogin />} />
+          </Route>
+          <Route path="student" element={"s"} />
+          <Route path="teacher" element={<Teacher />} />
+          <Route path="teacher/newQuestion" element={<CreateQuestion />} />
+        </Routes>
+      </BrowserRouter>
+    </QuestionContext>
   );
 }
 
