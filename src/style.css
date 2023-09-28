@@ -12,7 +12,7 @@
   --darkGreen: #a5a58d;
   --green: #b7b7a4;
   --darkestBrown: #cb997e;
-  --darkBorwn: #ddbea9;
+  --darkBrown: #ddbea9;
   --brown: #ffe8d6;
   --thin: 300;
   --normal: 400;
@@ -24,7 +24,7 @@
   background-color: var(--brown);
 }
 
-.center-abs{
+.center-abs {
   position: absolute;
   left: 50%;
   top: 50%;

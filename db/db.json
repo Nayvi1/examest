@@ -1,0 +1,100 @@
+{
+  "quiz": [
+    {
+      "id": 1,
+      "name": "alphabets",
+      "questions": [
+        {
+          "question": "a",
+          "options": [
+            {
+              "option1": "a",
+              "isTrue": true
+            },
+            {
+              "option2": "b",
+              "isTrue": false
+            },
+            {
+              "option3": "c",
+              "isTrue": false
+            },
+            {
+              "option4": "d",
+              "isTrue": false
+            }
+          ]
+        },
+        {
+          "question": "b",
+          "options": [
+            {
+              "option1": "b",
+              "isTrue": true
+            },
+            {
+              "option2": "c",
+              "isTrue": false
+            },
+            {
+              "option3": "d",
+              "isTrue": false
+            },
+            {
+              "option4": "e",
+              "isTrue": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "alphabets",
+      "questions": [
+        {
+          "question": "a",
+          "options": [
+            {
+              "option1": "a",
+              "isTrue": true
+            },
+            {
+              "option2": "b",
+              "isTrue": false
+            },
+            {
+              "option3": "c",
+              "isTrue": false
+            },
+            {
+              "option4": "d",
+              "isTrue": false
+            }
+          ]
+        },
+        {
+          "question": "b",
+          "options": [
+            {
+              "option1": "b",
+              "isTrue": true
+            },
+            {
+              "option2": "c",
+              "isTrue": false
+            },
+            {
+              "option3": "d",
+              "isTrue": false
+            },
+            {
+              "option4": "e",
+              "isTrue": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

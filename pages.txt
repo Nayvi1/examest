@@ -28,3 +28,51 @@ Paragraph Text — 14px
 Body Text — 16px
 Text Input— 16px
 Title Text — 20/22px
+
+
+==================================================
+
+const objectShape = {
+    quiz:[{
+    id:
+    name:
+    questions:{
+        question:
+        option1:{
+            isTrue: true
+            option:
+        }
+         option2:{
+            isTrue: false
+            option:
+        }
+         option3:{
+            isTrue: false
+            option: 
+        }
+         option4:{
+            isTrue: false
+            option: 
+        }
+    } 
+    }]
+   ,{
+        question:
+        option1:{
+            isTrue: true
+            option:
+        }
+         option2:{
+            isTrue: false
+            option:
+        }
+         option3:{
+            isTrue: false
+            option: 
+        }
+         option4:{
+            isTrue: false
+            option: 
+        }
+    }
+}
