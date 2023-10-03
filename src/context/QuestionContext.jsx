@@ -5,15 +5,38 @@ import { Questions } from "./useQuestions";
 function QuestionContext({ children }) {
   const [questions, setQuestions] = useState(undefined);
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   async function fetchQuestions() {
     try {
       setIsLoading(true);
+      setError("");
       const res = await fetch("http://localhost:3000/quiz");
       const data = await res.json();
       setQuestions(data);
     } catch (err) {
-      console.log(err);
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
+  async function postQuestion(questions) {
+    try {
+      setIsLoading(true);
+      setError("");
+      const res = await fetch("http://localhost:3000/quiz", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json", // Set the content type
+        },
+        body: JSON.stringify(questions),
+      });
+      res.json()
+      fetchQuestions();
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
     } finally {
       setIsLoading(false);
     }
@@ -28,6 +51,8 @@ function QuestionContext({ children }) {
       value={{
         questions,
         isLoading,
+        error,
+        postQuestion,
       }}
     >
       {children}
