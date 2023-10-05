@@ -6,6 +6,7 @@ import TeacherLogin from "./components/Login/Teacher/TeacherLogin";
 import Teacher from "./pages/Teacher";
 import CreateQuestion from "./pages/CreateQuestion";
 import QuestionContext from "./context/QuestionContext";
+import EditQuestions from "./pages/EditQuestions";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="student" element={"s"} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="teacher/newQuestion" element={<CreateQuestion />} />
+          <Route path="teacher/:questionId" element={<EditQuestions />} />
         </Routes>
       </BrowserRouter>
     </QuestionContext>

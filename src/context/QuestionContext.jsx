@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Questions } from "./useQuestions";
 
 /* eslint-disable react/prop-types */
@@ -7,11 +7,12 @@ function QuestionContext({ children }) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  async function fetchQuestions() {
+
+  async function fetchQuestions(id = "") {
     try {
       setIsLoading(true);
       setError("");
-      const res = await fetch("http://localhost:3000/quiz");
+      const res = await fetch(`http://localhost:3000/quiz${id ? "/" + id:""}`);
       const data = await res.json();
       setQuestions(data);
     } catch (err) {
@@ -20,6 +21,10 @@ function QuestionContext({ children }) {
       setIsLoading(false);
     }
   }
+
+  const mFetchQuestions = useCallback((id)=>{
+    fetchQuestions(id)
+  },[])
 
   async function postQuestion(questions) {
     try {
@@ -32,7 +37,7 @@ function QuestionContext({ children }) {
         },
         body: JSON.stringify(questions),
       });
-      res.json()
+      res.json();
       fetchQuestions();
     } catch (err) {
       console.error(err);
@@ -53,6 +58,7 @@ function QuestionContext({ children }) {
         isLoading,
         error,
         postQuestion,
+        mFetchQuestions
       }}
     >
       {children}

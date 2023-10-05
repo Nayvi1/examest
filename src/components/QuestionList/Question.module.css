@@ -7,4 +7,11 @@
   display: flex;
   align-items: center;
   padding-left: 10px;
+  padding-right: 15px;
+  justify-content: space-between;
+}
+
+.question a {
+  color: black;
+  text-decoration: none;
 }
