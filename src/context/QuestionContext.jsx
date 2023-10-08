@@ -1,32 +1,31 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { Questions } from "./useQuestions";
 
 /* eslint-disable react/prop-types */
 function QuestionContext({ children }) {
   const [questions, setQuestions] = useState(undefined);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
 
-  async function fetchQuestions(id = "") {
+  const fetchQuestions = useCallback(async function (id = "") {
     try {
       setIsLoading(true);
       setError("");
-      const res = await fetch(`http://localhost:3000/quiz${id ? "/" + id:""}`);
+      const res = await fetch(
+        `http://localhost:3000/quiz${id ? "/" + id : ""}`
+      );
       const data = await res.json();
       setQuestions(data);
+      return data;
     } catch (err) {
       setError(err.message);
     } finally {
       setIsLoading(false);
     }
-  }
+  }, []);
 
-  const mFetchQuestions = useCallback((id)=>{
-    fetchQuestions(id)
-  },[])
-
-  async function postQuestion(questions) {
+  const postQuestion = useCallback(async function (questions) {
     try {
       setIsLoading(true);
       setError("");
@@ -38,31 +37,83 @@ function QuestionContext({ children }) {
         body: JSON.stringify(questions),
       });
       res.json();
-      fetchQuestions();
+      // fetchQuestions();
     } catch (err) {
       console.error(err);
       setError(err.message);
     } finally {
       setIsLoading(false);
     }
-  }
+  }, []);
+
+  const editQuestion = useCallback(async function (questions, id) {
+    try {
+      setIsLoading(true);
+      setError("");
+      const res = await fetch(`http://localhost:3000/quiz/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json", // Set the content type
+        },
+        body: JSON.stringify(questions),
+      });
+      res.json();
+      // fetchQuestions();
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const removeQuestion = useCallback(async function (id) {
+    try {
+      setIsLoading(true);
+      setError("");
+      const res = await fetch(`http://localhost:3000/quiz/${id}`, {
+        method: "DELETE",
+      });
+      res.json();
+      // fetchQuestions();
+    } catch (err) {
+      console.error(err);
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     fetchQuestions();
-  }, []);
+  }, [fetchQuestions]);
+
+  const contextValue = useMemo(
+    () => ({
+      questions,
+      isLoading,
+      error,
+      postQuestion,
+      fetchQuestions,
+      editQuestion,
+      setQuestions,
+      removeQuestion,
+     
+    }),
+    [
+      questions,
+      isLoading,
+      error,
+      postQuestion,
+      fetchQuestions,
+      editQuestion,
+      removeQuestion,
+  
+    ]
+  );
 
   return (
-    <Questions.Provider
-      value={{
-        questions,
-        isLoading,
-        error,
-        postQuestion,
-        mFetchQuestions
-      }}
-    >
-      {children}
-    </Questions.Provider>
+    <Questions.Provider value={contextValue}>{children}</Questions.Provider>
   );
 }
 

@@ -1,8 +1,11 @@
+import { useQuestions } from "../../context/useQuestions";
 import Button from "../etc/Button";
 import styles from "./AddQuestions.module.css";
 /* eslint-disable react/prop-types */
 
 function AddQuestions({ question, onChange, index, onClick }) {
+  const { isLoading } = useQuestions();
+
   return (
     <div className={styles.container}>
       <div className={styles.firstRow}>
@@ -16,7 +19,12 @@ function AddQuestions({ question, onChange, index, onClick }) {
             onChange={(e) => onChange(e, index)}
           />
         </label>
-        <Button handleClick={(e) => onClick(e, question.id)}>Delete</Button>
+        <Button
+          isDisable={isLoading}
+          handleClick={(e) => onClick(e, question.id)}
+        >
+          Delete
+        </Button>
       </div>
       <label>
         option1 (the correct option):

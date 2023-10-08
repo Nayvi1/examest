@@ -17,11 +17,20 @@
   transform: translateX(-50%) translateY(-50%);
   width: 100%;
   height: 100%;
-  border: 2px solid var(--darkestGreen);
+  border-top: 2px solid var(--darkestGreen);
+  border-bottom: 2px solid var(--darkestGreen);
   transition: 100ms ease-in;
 }
 
 .buttom:hover::before {
-  width: 90%;
-  height: 90%;
+  /* width: 90%; */
+  height: 120%;
+}
+
+.buttom:disabled {
+  cursor: not-allowed;
+}
+
+.buttom:disabled::before {
+  height: 120%;
 }

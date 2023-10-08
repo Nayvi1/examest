@@ -4,6 +4,9 @@ import Button from "../components/etc/Button";
 import styles from "./CreateQuestion.module.css";
 import { useQuestions } from "../context/useQuestions";
 import { useNavigate } from "react-router-dom";
+import handleInputChange from "../utils/handleInputChange";
+import handleInputDelete from "../utils/handleInputDelete";
+import handleAddQuestion from "../utils/handleAddQuestion";
 
 const initState = {
   name: "",
@@ -35,112 +38,42 @@ const initState = {
 
 function CreateQuestion() {
   const [questionList, setQuestionList] = useState(initState);
-  const { postQuestion } = useQuestions();
+  const { postQuestion, setQuestions, isLoading } = useQuestions();
   const navigate = useNavigate();
   function handleClick(e) {
-    e.preventDefault();
-
-    setQuestionList((prev) => {
-      return {
-        ...prev,
-        questions: [
-          ...prev.questions,
-          {
-            id: Math.floor(Math.random() * 99999),
-            question: "",
-            options: [
-              {
-                option: "",
-                isTrue: true,
-              },
-              {
-                option: "",
-                isTrue: false,
-              },
-              {
-                option: "",
-                isTrue: false,
-              },
-              {
-                option: "",
-                isTrue: false,
-              },
-            ],
-          },
-        ],
-      };
-    });
+    handleAddQuestion(e, setQuestionList);
   }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    postQuestion(questionList);
-    navigate("/teacher");
+    postQuestion(questionList).then(() => {
+      navigate("/teacher");
+    });
   }
 
   function handleDelete(e, id) {
-    e.preventDefault();
-    console.log();
-
-    setQuestionList((prev) => {
-      const allTheQuestions = [...prev.questions];
-      const filteredQuestions = allTheQuestions.filter((question) => {
-        return question.id !== id;
-      });
-      return {
-        ...prev,
-        questions: filteredQuestions,
-      };
-    });
+    handleInputDelete(e, id, setQuestionList);
   }
 
   function handleChange(e, index) {
-    const { name, value } = e.target;
-
-    setQuestionList((prev) => {
-      if (name === "name") {
-        return {
-          ...prev,
-          name: value,
-        };
-      } else if (name === "question") {
-        const updatedQuestions = [...prev.questions]; // Create a copy of questions array
-        updatedQuestions[index] = {
-          ...updatedQuestions[index],
-          question: value, // Update the question property
-        };
-
-        return {
-          ...prev,
-          questions: updatedQuestions, // Update the questions array
-        };
-      } else {
-        const updatedOptions = [...prev.questions];
-
-        updatedOptions[index].options[parseInt(name)] = {
-          ...updatedOptions[index].options[parseInt(name)],
-          option: value,
-        };
-
-        return {
-          ...prev,
-          questions: updatedOptions,
-        };
-      }
-    });
+    handleInputChange(e, index, setQuestionList);
   }
 
   useEffect(() => {
-    function handleReload(event){
+    function handleReload(event) {
       event.returnValue = "you will lose your questions if you reload";
-
     }
     window.addEventListener("beforeunload", handleReload);
-    return()=>{
-      
+    return () => {
       window.removeEventListener("beforeunload", handleReload);
-    }
+    };
+  });
+
+  useEffect(() => {
+    return () => {
+      setQuestions(undefined);
+    };
   });
 
   return (
@@ -167,10 +100,10 @@ function CreateQuestion() {
         ))}
 
         <div className={styles.btnContainer}>
-          <Button handleClick={handleClick} width="100px">
+          <Button isDisable={isLoading} handleClick={handleClick} width="100px">
             new Question
           </Button>
-          <Button>Create</Button>
+          <Button isDisable={isLoading}>Create</Button>
         </div>
       </form>
     </div>
