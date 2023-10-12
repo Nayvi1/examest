@@ -7,6 +7,8 @@ import Teacher from "./pages/Teacher";
 import CreateQuestion from "./pages/CreateQuestion";
 import QuestionContext from "./context/QuestionContext";
 import EditQuestions from "./pages/EditQuestions";
+import Student from "./pages/Student";
+import Quiz from "./pages/Quiz";
 
 function App() {
   return (
@@ -19,7 +21,8 @@ function App() {
             <Route path="student" element={<StudentLogin />} />
             <Route path="teacher" element={<TeacherLogin />} />
           </Route>
-          <Route path="student" element={"s"} />
+          <Route path="student" element={<Student />} />
+          <Route path="student/:questionId" element={<Quiz />} />
           <Route path="teacher" element={<Teacher />} />
           <Route path="teacher/newQuestion" element={<CreateQuestion />} />
           <Route path="teacher/:questionId" element={<EditQuestions />} />
