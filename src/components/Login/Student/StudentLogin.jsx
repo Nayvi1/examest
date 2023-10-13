@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import Button from "../../etc/Button";
 import styles from "./StudentLogin.module.css";
+import { useQuestions } from "../../../context/useQuestions";
+import { useEffect } from "react";
 
 function StudentLogin() {
   const navigate = useNavigate();
@@ -10,6 +12,13 @@ function StudentLogin() {
 
     navigate("/student");
   }
+
+  const { setQuestions } = useQuestions();
+  useEffect(() => {
+    return () => {
+      setQuestions(undefined);
+    };
+  });
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
