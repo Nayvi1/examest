@@ -7,11 +7,13 @@ import Error from "../Error/Error";
 import { useEffect } from "react";
 
 function QuestionList() {
-  const { questions, isLoading, error, fetchQuestions } = useQuestions();
+  const { questions, isLoading, error, fetchQuestions, setQuestions } =
+    useQuestions();
 
   useEffect(() => {
+    setQuestions(undefined);
     fetchQuestions();
-  }, [fetchQuestions]);
+  }, [fetchQuestions, setQuestions]);
 
   if (isLoading) return <Loading />;
   if (error) return <Error message={error} />;
